@@ -1,5 +1,6 @@
 import subprocess
 import time
+import requests
 
 CHROME_URL_TO_APP = {
   "notion.so": "Notion",
@@ -63,5 +64,7 @@ def get_current_application():
     return process
 
 while True:
-    print(get_current_application())
+    application = get_current_application()
+    print (application)
+    requests.post('http://localhost:8000/log', data={'userId': 0, 'appName': application})
     time.sleep(5)
